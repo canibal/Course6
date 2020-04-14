@@ -2,7 +2,6 @@
 
 import os
 import requests
-import json
 
 data_dir = ('data/feedback/')
 file_list = os.listdir(data_dir)
