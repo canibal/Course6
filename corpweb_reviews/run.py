@@ -7,6 +7,13 @@ import json
 data_dir = ('data/feedback/')
 file_list = os.listdir(data_dir)
 
+def post_request(p):
+    response = requests.post("http://<corpweb-external-IP>/feedback/", json=p)
+    code = response.status_code
+    body = response.text
+    print(f"The request returned code {code}." \
+          f"{body}")
+
 def create_dicts(files):
     feedback_d = {}
     fd = []
@@ -19,11 +26,9 @@ def create_dicts(files):
                 val_list.append(line.strip())
             z = zip(key_list, val_list)
             f_d = dict(z)
-            fd.append(f_d)
-        feedback_d = dict(list(enumerate(fd)))
-    return feedback_d
-
-
+            post_request(f_d)
+        #feedback_d = dict(list(enumerate(fd)))
+    #return feedback_d
 
 if __name__=="__main__":
-    print(create_dicts(file_list))
+    create_dicts(file_list))
