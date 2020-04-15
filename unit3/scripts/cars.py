@@ -3,6 +3,9 @@
 import json
 import locale
 import sys
+import os
+import emails
+import reports
 
 
 def load_data(filename):
@@ -36,12 +39,13 @@ def process_data(data):
       item["revenue"] = item_revenue
       max_revenue = item
     # TODO: also handle max sales
-    item_model = item["car"]["car_model"]
+  for item in data:
     item_sales = item["total_sales"]
     if item_sales > max_sales["sales"]:
       item["sales"] = item_sales
       max_sales = item
     # TODO: also handle most popular car_year
+  for item in data:
     item_year = item["car"]["car_year"]
     item_yearly_sales = item_sales
     if item_yearly_sales > pop_year["sales"]:
@@ -67,9 +71,20 @@ def main(argv):
   summary = process_data(data)
   print(summary)
   # TODO: turn this into a PDF report
-
+  report_summary = ""
+  for line in summary:
+    report_summary += line
+    report_summary += '<br/>'
+  reports.generate("/tmp/cars.pdf", "Sales summary for last month", report_summary, cars_dict_to_table(data))
   # TODO: send the PDF report as an email attachment
-
+  sender = "automation@example.com"
+  recipient = "{}@example.com".format(os.environ.get('USER'))
+  subject = "Sales summary for last month"
+  att_path = "/tmp/cars.pdf"
+  email_summary = ""
+  for line in summary:
+    email_summary += line
+  emails.send(emails.generate(sender, recipient, subject, email_summary, att_path))
 
 if __name__ == "__main__":
   main(sys.argv)
