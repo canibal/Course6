@@ -90,7 +90,7 @@ def main(argv):
   att_path = "/tmp/cars.pdf"
   email_summary = ""
   for line in summary:
-    email_summary += line
+    email_summary += line + '\n'
   emails.send(emails.generate(sender, recipient, subject, email_summary, att_path))
 
 if __name__ == "__main__":
