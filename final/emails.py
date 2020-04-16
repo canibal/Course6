@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-import smtp #(et al.)
+import email
+import smtplib
 
 def generate_email():
     pass
