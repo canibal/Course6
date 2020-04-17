@@ -37,4 +37,4 @@ def create_dicts(files):
     #return feedback_d
 
 if __name__=="__main__":
-    create_dicts(file_list))
+    create_dicts(file_list)
