@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """Generates and sends emails."""
 
 import email.message
