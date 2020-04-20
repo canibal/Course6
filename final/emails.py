@@ -11,9 +11,9 @@ def generate_email(sender, recipient, subject, body, attachment_path=None):
     """Create an email with an attachement."""
     # Basic Email formatting
     message = email.message.EmailMessage()
+    message["Subject"] = subject
     message["From"] = sender
     message["To"] = recipient
-    message["Subject"] = subject
     message.set_content(body)
 
     # Process the attachment and add it to the email
@@ -34,5 +34,6 @@ def generate_email(sender, recipient, subject, body, attachment_path=None):
 def send_email(message):
     """Send the message to the configured SMTP server."""
     mail_server = smtplib.SMTP('localhost')
+    print(message)
     mail_server.send_message(message)
     mail_server.quit()

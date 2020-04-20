@@ -35,10 +35,10 @@ def main():
     title = 'Processed Update on ' + str(datetime.date.today())
     additional_info = ''
     sender = 'automation@example.com'
-    recipient = 'username@example.com'
+    recipient = 'student-03-4a64ed0245e7@example.com'
     subject = 'Upload Completed - Online Fruit Store'
-    body = 'All fruits are uploaded to our website successfully. \
-            A detailed list is attached to this email.'
+    body = 'All fruits are uploaded to our website successfully.\n \
+A detailed list is attached to this email.'
     attachment_path = filename
     file_list = [f for f in os.listdir(directory) if not f.startswith('.')]
     data = load_data(directory, file_list)

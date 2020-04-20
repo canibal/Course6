@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Health Check.
 
 Checks for various system problems, and notifies the administrator to check
@@ -12,10 +11,9 @@ import socket
 
 
 sender = 'automation@example.com'
-recipient = '<username>@example.com'
+recipient = 'student-03-4a64ed0245e7@example.com'
 body = 'Please check your system and resolve the issue as soon as possible.'
-collector = {'sender': sender, 'recipient': recipient, 'subject': '', \
-             'body': body}
+collector = {'sender': sender, 'recipient': recipient, 'subject': '', 'body': body}
 
 
 def chk_cpu():
@@ -76,7 +74,8 @@ def main():
         collector['subject'] = error.args[0]
         email_list.append(list(collector.values()))
     for message in email_list:
-        emails.send_email(message)
+        msg = emails.generate_email(message[0], message[1], message[2], message[3])
+        emails.send_email(msg)
 
 
 if __name__ == "__main__":
